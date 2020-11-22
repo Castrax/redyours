@@ -3,7 +3,8 @@
   <div class="progress-tickets mt-5 mb-5">
     <h3 class="status-title">📚 In Progress</h3>
     <% @tickets.where(status: 'In progress').each do |ticket| %>
-      <%= link_to ticket do %>
+      <%= link_to ticket, data: {toggle: "modal", target: '#showModal'}, class: 'static-popup-link' do %>
+        <%= render :partial => 'modal', locals: { ticket: ticket } %>
         <div class="card mt-5" style="width: 300px;">
           <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
           <div class="card-body">
@@ -20,6 +21,7 @@
   <div class="review-tickets mt-5 mb-5">
     <h3 class="status-title">⚙️ In Review</h3>
     <% @tickets.where(status: 'In review').each do |ticket| %>
+      <%= render :partial => 'modal', locals: { ticket: ticket } %>
       <div class="card mt-5" style="width: 300px;">
         <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
         <div class="card-body">
@@ -35,6 +37,7 @@
   <div class="completed-tickets mt-5 mb-5">
     <h3 class="status-title">🙌 Completed</h3>
     <% @tickets.where(status: 'Completed').each do |ticket| %>
+      <%= render :partial => 'modal', locals: { ticket: ticket } %>
       <div class="card mt-5" style="width: 300px;">
         <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
         <div class="card-body">
