@@ -16,6 +16,15 @@ h2 {
   color: $redmine-red;
 }
 
+a {
+  color: $tickets-font-color;
+}
+
+a:hover {
+  color: $tickets-font-color;
+  text-decoration: none;
+}
+
 .content-wrapper {
   min-height: calc(100vh - 150px - 80px);
 }

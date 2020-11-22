@@ -1,0 +1,50 @@
+<div class="container-tickets">
+  <h1 class="mt-5">Tickets dashboard</h1>
+  <div class="progress-tickets mt-5 mb-5">
+    <h3 class="status-title">📚 In Progress</h3>
+    <% @tickets.where(status: 'In progress').each do |ticket| %>
+      <%= link_to ticket do %>
+        <div class="card mt-5" style="width: 300px;">
+          <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
+          <div class="card-body">
+            <div class="card-text">
+              <p class="title-card"><%= ticket.title %></p>
+              <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
+              <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="review-tickets mt-5 mb-5">
+    <h3 class="status-title">⚙️ In Review</h3>
+    <% @tickets.where(status: 'In review').each do |ticket| %>
+      <div class="card mt-5" style="width: 300px;">
+        <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
+        <div class="card-body">
+          <div class="card-text">
+            <p class="title-card"><%= ticket.title %></p>
+            <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
+            <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="completed-tickets mt-5 mb-5">
+    <h3 class="status-title">🙌 Completed</h3>
+    <% @tickets.where(status: 'Completed').each do |ticket| %>
+      <div class="card mt-5" style="width: 300px;">
+        <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
+        <div class="card-body">
+          <div class="card-text">
+            <p class="title-card"><%= ticket.title %></p>
+            <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
+            <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
