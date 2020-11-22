@@ -5,3 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+puts "Dropping the database..."
+Ticket.destroy_all
+User.destroy_all
+
+STATUS = ['In progress', 'In review', 'Completed']
+
+puts "Creating users..."
+u1 = User.create(first_name: 'Mathilde', last_name: 'Robert', email: 'm.robert@skema.edu', password: 'testtest')
+u2 = User.create(first_name: 'Aurélie', last_name: 'Rix', email: 'aurelie.rix@gmail.com', password: 'testtest')
+u3 = User.create(first_name: 'Paula', last_name: 'Richeux', email: 'paula.richeux@gmail.com', password: 'testtest')
+
+USERS = [u1.id, u2.id, u3.id]
+
+puts "Creating tickets..."
+10.times do
+  photo_url = 'https://source.unsplash.com/collection/856079'
+  Ticket.create(title: Faker::Hacker.adjective, description: Faker::Hacker.say_something_smart, status: STATUS.sample, user_id: USERS.sample, open: true, photo_url: photo_url)
+end
