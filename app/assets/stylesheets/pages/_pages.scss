@@ -1,3 +1,17 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  color: $redmine-red;
+}
+
+h2 {
+  color: $redmine-red;
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 150px - 80px);
+}
