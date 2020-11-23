@@ -18,18 +18,20 @@
           <%= render partial: 'comments/new', locals: { ticket: ticket } %>
         </div>
       <% else %>
+        <div class="form-comments">
+          <%= render partial: 'comments/new', locals: { ticket: ticket } %>
+        </div>
         <div class="comments-results">
           <% ticket.comments.each do |comment| %>
             <p><%= comment.description %></p>
           <% end %>
         </div>
-        <div class="form-comments">
-          <%= render partial: 'comments/new', locals: { ticket: ticket } %>
-        </div>
       <% end %>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit the ticket</button>
+        <% if current_user == ticket.user %>
+          <%= button_to 'Close the ticket', ticket_path(ticket, open: false), method: :patch, class: 'btn btn-warning' %>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "pages#home"
-  resources :tickets, only: [:index, :show] do
+  devise_for :users
+  get '/users' => 'tickets#index', as: :user_root
+  resources :tickets, only: [:index, :show, :update] do
     resources :comments, only: [:new, :create]
   end
 end
