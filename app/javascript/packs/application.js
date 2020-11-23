@@ -20,5 +20,5 @@ import "bootstrap";
 import { triggerModal } from '../components/trigger_modal';
 
 document.addEventListener('turbolinks:load', () => {
-  triggerModal();
+  // triggerModal();
 });
