@@ -6,4 +6,7 @@ class User < ApplicationRecord
   has_many :tickets
   has_many :assignments
   has_many :comments
+
+  def pick_a_user
+  end
 end

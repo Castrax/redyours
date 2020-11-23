@@ -11,7 +11,7 @@ puts "Dropping the database..."
 Ticket.destroy_all
 User.destroy_all
 
-STATUS = ['In progress', 'In review', 'Completed']
+STATUS = [:in_progress, :in_review, :completed]
 
 puts "Creating users..."
 u1 = User.create(first_name: 'Mathilde', last_name: 'Robert', email: 'm.robert@skema.edu', password: 'testtest')
