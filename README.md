@@ -1,35 +1,70 @@
 # DOCUMENTATION REDYOURS
 
-* Versions
+## Versions
+
 Ruby : 2.7.0
+
 RoR : 6.0.3.4
 
-* Base de données
+Host : Heroku
+
+Lien : [redyours.xyz](www.redyours.xyz)
+
+## BDD
+
 J'ai choisi d'implémenter une base de données PostgreSQL, car elle est une base de données OpenSource maniable, et scalable.
 postgres : 13.0
 
-* Modélisation de base de données
+## Modélisation de BDD
 
+![Modélisation BDD](https://zupimages.net/up/20/48/crwh.png)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+La BDD contient 3 tables : 
+* une table __users__ qui contient les champs obligatoires et une colonne Admin (voir le paragraphe sur Sidekiq ci-dessous)
+* une table __tickets__ qui contient tous les champs obligatoires des tickets, un booléen open (qui stocke l'ouverture ou non du ticket), une colonne status qui stocke le statut des tickets en fonction de leur avancement, une colonne photo_url qui stocke l'url des visuels liés aux tickets, et la clé étrangère :user_id qui correspond à la table users. 
+* Enfin, une table de jointure __comments__ qui contient les deux clés étrangères correspondant à la table users, et à la table tickets.
 
-Things you may want to cover:
+## Hypothèses et choix techniques
 
-* Ruby version
+### Utilisateurs
+J'ai supposé qu'un gestionnaire de ticket pour un ticket donné, était le user affecté au ticket à sa création (de façon aléatoire par un script automatique).
 
-* System dependencies
+### Système d'authentification
+J'ai implémenté le système d'authentification le plus utilisé pour le framework Ruby on Rails, à savoir la gem Devise (voir le paragraphe sur les gems ci-dessous). N'importe quel utilisateur peut s'authentifier, se créer un compte depuis la navbar à n'importe quel endroit du site.
+J'ai délibérement choisi de ne pas implémenter de solution d'authorization, comme il n'était pas précisé qu'il fallait développer un CRUD pour les models de Ticket, ou de Comment.
 
-* Configuration
+### Système de tickets
+Affichage des tickets ouverts sur 3 colonnes en fonction de leur statut, avec implémentation d'un système de modals pour afficher les shows des tickets.
+Pour ce faire, et pour ne pas perturber l'UX, j'ai développé le create des comments en ajax.
+Possibilité de fermer un ticket par son gestionnaire (update du ticket).
+L'attribution d'un ticket se fait grâce à la méthode de classe User.pick_a_user disponible dans le model User.
 
-* Database creation
+### Création de tickets
+La création de tickets se fait via l'exécution d'un job Active Job en arrière-plan (classe TicketsJob) qui tourne désormais en production, grâce à Sidekiq et Redis. En fonction de l'heure de la journée, une méthode create_ticket (qui permet la création d'un ticket en base de données), ou une méthode raise_error (qui affiche des strings) est appelée.
+Le scheduler cron de Sidekiq cron permet de lancer le job toutes les 5 minutes.
+Une autre solution aurait été d'ajouter la gem Whenever pour gérer la partie scheduler, afin de gérer le planning d'heures en dehors du job.
 
-* Database initialization
+### Gestion des envois d'email
+Deux emails sont envoyés en instantané (deliver_now) par la plateforme :
+* L'un a la création d'un ticket au gestionnaire de ticket 
+* L'autre envoyé au gestionnaire de ticket lors de la publication d'un comment par un autre utilisateur que le gestionnaire
+J'ai utilisé ActionMailer pour paramétrer les emails, et en production, j'utilise le service Mailgun pour l'envoi des mails.
 
-* How to run the test suite
+### Gems non présentes nativement
+*Devise*
+La gem évite d'implémenter à la main tout le système d'authentification, et notamment les vues pour se connecter au site.
+C'est la gem la plus utilisée pour l'authentification.
 
-* Services (job queues, cache servers, search engines, etc.)
+*Cloudinary*
+Cloudinary est un service tiers de stockage cloud de photos et de fichiers. Elle m'a été utile pour héberger les petites images des tickets. Cette gem est nécessaire lorsque l'on déploie sur Heroku, car leur système de dynos étant éphémère, on ne peut pas y stocker des images. 
 
-* Deployment instructions
+*Faker*
+Faker est une gem permettant de générer des fausses données. Elle m'a été utile pour générer des fake titres et descriptions pour les tickets.
 
-* ...
+*Sidekiq, Sidekiq-failures et Sidekiq-cron*
+Ce sont des gems permettant de faire tourner des background jobs sur Rails. Elle m'ont été utiles pour faire tourner le job nécessaire à la création des tickets, pour le planifier, et pour vérifier les erreurs via le Dashboard Sidekiq (disponible sur l'url /sidekiq), ouvert à tous les utilisateurs étant admin.
+
+### Difficultés rencontrées
+Attention, malgré la création d'un nom de domaine redyours.xyz, d'ajout de DNS spécifiques chez le registrar et de recipients autorisés via le dashboard, le service Mailgun ne semble toujours pas autoriser la connexion pour les envois SMTP à toutes les adresses mail, ce qui provoque deux erreurs :
+* Une erreur 500 en front lors de la création d'un commentaire.
+* La création d'une erreur de tâche en production dans le script qui tourne pour la création de ticket.
