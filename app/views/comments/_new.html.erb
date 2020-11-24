@@ -1,4 +1,8 @@
-<%= form_with model: [ticket, @comment], remote: true, html: {class: "form"} do |f| %>
-  <%= f.text_area :description %>
-  <%= f.submit "Create a comment" %>
-<% end %>
+<div class="container">
+  <%= form_with model: [ticket, @comment], remote: true, html: {class: "form"} do |f| %>
+    <div class="form-group">
+      <%= f.text_area :description, class: "form-control", rows: 3 %>
+    </div>
+    <%= f.submit "Create a comment", class: 'btn btn-warning' %>
+  <% end %>
+</div>

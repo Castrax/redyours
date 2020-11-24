@@ -4,15 +4,12 @@
     <div class="card mt-5" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Welcome on your dashboard</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">Please feel free to visit each ticket, and to comment them.</p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Number of opened tickets : <%= @tickets.count %></li>
         <li class="list-group-item">Number of closed tickets : <%= Ticket.where(open: false).count %></li>
       </ul>
-      <div class="card-body">
-        <a href="#" class="card-link">See closed tickets</a>
-      </div>
     </div>
   </div>
   <div class="progress-tickets mt-5 mb-5">
@@ -24,10 +21,12 @@
             <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
             <div class="card-body">
               <div class="card-text">
-                <p class="title-card"><span class="title-desc">Titre :</span> <%= ticket.title %></p>
-                <p class="manager-card"><span class="manager-desc">Manager :</span><%= ticket.user.first_name %></p>
-                <p><span class="created-at">Created :</span> <%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
-                <p><%= ticket.comments.count %></p>
+                <p class="title-card"><span class="title-desc">📌<%= ticket.title.capitalize %></span></p>
+                <p><span class="created-at">Created: <%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></span></p>
+                <div class="card-bottom">
+                  <p class="manager-card"><%= ticket.user.first_name %></p>
+                  <p><span class="comments-count">📩<%= ticket.comments.count %></span></p>
+                </div>
               </div>
             </div>
           </div>
@@ -45,10 +44,12 @@
             <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
             <div class="card-body">
               <div class="card-text">
-                <p class="title-card"><%= ticket.title %></p>
-                <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
-                <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
-                <p><%= ticket.comments.count %></p>
+                <p class="title-card"><span class="title-desc">🗒 <%= ticket.title.capitalize %></span></p>
+                <p><span class="created-at">Created: <%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></span></p>
+                <div class="card-bottom">
+                  <p class="manager-card"><%= ticket.user.first_name %></p>
+                  <p><span class="comments-count">📩<%= ticket.comments.count %></span></p>
+                </div>
               </div>
             </div>
           </div>
@@ -66,10 +67,12 @@
             <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
             <div class="card-body">
               <div class="card-text">
-                <p class="title-card"><%= ticket.title %></p>
-                <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
-                <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
-                <p><%= ticket.comments.count %></p>
+                <p class="title-card"><span class="title-desc">🖥<%= ticket.title.capitalize %></span></p>
+                <p><span class="created-at">Created: <%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></span></p>
+                <div class="card-bottom">
+                  <p class="manager-card"><%= ticket.user.first_name %></p>
+                  <p><span class="comments-count">📩<%= ticket.comments.count %></span></p>
+                </div>
               </div>
             </div>
           </div>

@@ -15,14 +15,15 @@ STATUS = [:in_progress, :in_review, :completed]
 OPEN = [true, false]
 
 puts "Creating users..."
-u1 = User.create(first_name: 'Mathilde', last_name: 'Robert', email: 'm.robert@skema.edu', password: 'testtest', opened_tickets: 0)
-u2 = User.create(first_name: 'Aurélie', last_name: 'Rix', email: 'aurelie.rix@gmail.com', password: 'testtest')
-u3 = User.create(first_name: 'Paula', last_name: 'Richeux', email: 'paula.richeux@gmail.com', password: 'testtest')
+u1 = User.create(first_name: 'Mathilde', last_name: 'Robert', email: 'm.robert@skema.edu', password: 'testtest')
+u2 = User.create(first_name: 'Aurélie', last_name: 'Rix', email: 'aurelie.test@gmail.com', password: 'testtest')
+u3 = User.create(first_name: 'Paula', last_name: 'Richeux', email: 'paula.test@gmail.com', password: 'testtest')
+u4 = User.create(first_name: 'Jérémy', last_name: 'Kenigsman', email: 'jeremy.kenigsman@simplebo.fr', password: 'qsdfghjklm')
 
 USERS = [u1.id, u2.id, u3.id]
 
 puts "Creating tickets..."
-10.times do
-  photo_url = 'https://source.unsplash.com/collection/856079'
-  Ticket.create(title: Faker::Hacker.adjective, description: Faker::Hacker.say_something_smart, status: STATUS.sample, user_id: USERS.sample, open: OPEN.sample, photo_url: photo_url)
+20.times do
+  photo_url = 'https://picsum.photos/300/200'
+  Ticket.create(title: Faker::Lorem.paragraph(sentence_count: 2, supplemental: true), description: Faker::Lorem.paragraph(sentence_count: 2, supplemental: true, random_sentences_to_add: 4), status: STATUS.sample, user_id: USERS.sample, open: OPEN.sample, photo_url: "#{photo_url}?random=#{rand(1..9)}")
 end

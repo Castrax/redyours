@@ -2,13 +2,13 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-image">
-        <%= image_tag(ticket.photo_url, class: "card-img-top") %>
+        <%= image_tag(ticket.photo_url, class: "card-img-top-modal") %>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-header">
-        <h5 class="modal-title"><%= ticket.title %></h5>
+        <h5 class="modal-title"><%= ticket.title.capitalize %></h5>
       </div>
       <div class="modal-body">
         <p><%= ticket.description %></p>
@@ -22,16 +22,15 @@
         <div class="form-comments">
           <%= render partial: 'comments/new', locals: { ticket: ticket } %>
         </div>
-        <div class="comments-results">
+        <div class="comments-results mt-3">
           <% ticket.comments.each do |comment| %>
-            <p><%= comment.description %></p>
+            <%= render partial: 'comments/comment', locals: { comment: comment } %>
           <% end %>
         </div>
       <% end %>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit the ticket</button>
         <% if current_user == ticket.user %>
-          <%= button_to 'Close the ticket', ticket_path(ticket, open: false), method: :patch, class: 'btn btn-warning' %>
+          <%= button_to 'Permanently close the ticket', ticket_path(ticket, open: false), method: :patch, class: 'btn btn-flat' %>
         <% end %>
       </div>
     </div>

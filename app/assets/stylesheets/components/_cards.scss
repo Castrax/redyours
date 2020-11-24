@@ -10,3 +10,22 @@
   background-color: white;
   border-radius: 3%;
 }
+
+.title-card {
+  margin-bottom: 0;
+}
+
+.title-desc {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.created-at {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+}

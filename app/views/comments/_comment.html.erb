@@ -1,1 +1,5 @@
-<%= @comment.description %>
+<div class="comment-indiv ml-3 mt-4">
+  <p class="comment-name"><%= comment.user.first_name %> <%= comment.user.last_name %></p>
+  <p class="created-at"> <%= comment.created_at %></p>
+  <p class="comment-description"><%= comment.description %></p>
+</div>
