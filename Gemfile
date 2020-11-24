@@ -34,6 +34,7 @@ gem 'font-awesome-sass'
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sidekiq-cron'
+gem 'sendgrid-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
