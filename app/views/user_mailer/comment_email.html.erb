@@ -4,12 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>You have a new comment on your ticket by <%= @comment.user %></h1>
+    <h1>You have a new comment on your ticket by <%= @comment.user.first_name %><%= @comment.user.first_name %></h1>
     <p>
       Please connect yourself on Redyours, in order to answer to the comments feed !<br>
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url_ticket %>.
+      To login to the site, just follow <a href="http://www.redyours.herokuapp.com/<%= @url_ticket %>">this link. </a>.
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>
