@@ -1,0 +1,3 @@
+creation_of_ticket_job:
+  cron: "*/5 * * * *" #Create ticket every 5 minutes
+  class: "TicketsJob"

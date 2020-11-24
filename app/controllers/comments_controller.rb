@@ -1,9 +1,13 @@
 class CommentsController < ApplicationController
-  before_action :get_ticket, :get_user
+  before_action :set_ticket, :set_user
+
   def create
     @comment = @ticket.comments.build(comment_params)
     @comment.user = @user
     if @comment.save
+      if @user != @ticket.user
+        UserMailer.with(user: @ticket.user, comment: @comment).comment_email.deliver_now
+      end
       respond_to do |format|
         format.html
         format.js
@@ -22,11 +26,11 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:description)
   end
 
-  def get_ticket
+  def set_ticket
     @ticket = Ticket.find(params[:ticket_id])
   end
 
-  def get_user
+  def set_user
     @user = current_user
   end
 end

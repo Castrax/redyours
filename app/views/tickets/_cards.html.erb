@@ -17,59 +17,65 @@
   </div>
   <div class="progress-tickets mt-5 mb-5">
     <h3 class="status-title">📚 In Progress</h3>
-    <% @tickets.where(status: :in_progress).each do |ticket| %>
-      <%= link_to ticket, data: {toggle: "modal", target: "#showModal#{ticket.id}"}, class: 'static-popup-link' do %>
-        <div class="card mt-5" style="width: 300px;">
-          <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
-          <div class="card-body">
-            <div class="card-text">
-              <p class="title-card"><%= ticket.title %></p>
-              <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
-              <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
-              <p><%= ticket.comments.count %></p>
+    <div class="progress-results">
+      <% @tickets.where(status: :in_progress).each do |ticket| %>
+        <%= link_to ticket, data: {toggle: "modal", target: "#showModal#{ticket.id}"}, class: 'static-popup-link' do %>
+          <div class="card mt-5" style="width: 300px;">
+            <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
+            <div class="card-body">
+              <div class="card-text">
+                <p class="title-card"><span class="title-desc">Titre :</span> <%= ticket.title %></p>
+                <p class="manager-card"><span class="manager-desc">Manager :</span><%= ticket.user.first_name %></p>
+                <p><span class="created-at">Created :</span> <%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
+                <p><%= ticket.comments.count %></p>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
+        <%= render :partial => 'modal', locals: { ticket: ticket } %>
       <% end %>
-      <%= render :partial => 'modal', locals: { ticket: ticket } %>
-    <% end %>
+    </div>
   </div>
   <div class="review-tickets mt-5 mb-5">
     <h3 class="status-title">⚙️ In Review</h3>
-    <% @tickets.where(status: :in_review).each do |ticket| %>
-      <%= link_to ticket, data: {toggle: "modal", target: "#showModal#{ticket.id}"}, class: 'static-popup-link' do %>
-        <div class="card mt-5" style="width: 300px;">
-          <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
-          <div class="card-body">
-            <div class="card-text">
-              <p class="title-card"><%= ticket.title %></p>
-              <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
-              <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
-              <p><%= ticket.comments.count %></p>
+    <div class="reviews-results">
+      <% @tickets.where(status: :in_review).each do |ticket| %>
+        <%= link_to ticket, data: {toggle: "modal", target: "#showModal#{ticket.id}"}, class: 'static-popup-link' do %>
+          <div class="card mt-5" style="width: 300px;">
+            <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
+            <div class="card-body">
+              <div class="card-text">
+                <p class="title-card"><%= ticket.title %></p>
+                <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
+                <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
+                <p><%= ticket.comments.count %></p>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
+      <%= render :partial => 'modal', locals: { ticket: ticket } %>
       <% end %>
-    <%= render :partial => 'modal', locals: { ticket: ticket } %>
-    <% end %>
+    </div>
   </div>
   <div class="completed-tickets mt-5 mb-5">
     <h3 class="status-title">🙌 Completed</h3>
-    <% @tickets.where(status: :completed).each do |ticket| %>
-      <%= link_to ticket, data: {toggle: "modal", target: "#showModal#{ticket.id}"}, class: 'static-popup-link' do %>
-        <div class="card mt-5" style="width: 300px;">
-          <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
-          <div class="card-body">
-            <div class="card-text">
-              <p class="title-card"><%= ticket.title %></p>
-              <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
-              <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
-              <p><%= ticket.comments.count %></p>
+    <div class="completed-results">
+      <% @tickets.where(status: :completed).each do |ticket| %>
+        <%= link_to ticket, data: {toggle: "modal", target: "#showModal#{ticket.id}"}, class: 'static-popup-link' do %>
+          <div class="card mt-5" style="width: 300px;">
+            <%= image_tag(ticket.photo_url, class: "card-img-top mt-3") %>
+            <div class="card-body">
+              <div class="card-text">
+                <p class="title-card"><%= ticket.title %></p>
+                <p class="manager-card">Manager : <%= ticket.user.first_name %></p>
+                <p><%= ticket.created_at.strftime("%d of %B, %Y at %k:%M") %></p>
+                <p><%= ticket.comments.count %></p>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
+        <%= render :partial => 'modal', locals: { ticket: ticket } %>
       <% end %>
-      <%= render :partial => 'modal', locals: { ticket: ticket } %>
-    <% end %>
+    </div>
   </div>
 </div>

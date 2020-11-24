@@ -1,0 +1,6 @@
+<%= form_tag(tickets_path, {:class => "form-inline", :id => 'form'}) do %>
+  <div class="form-group">
+    <%= text_field_tag :title, params[:title], placeholder: "Look for a ticket...", class: 'form-control' %>
+    <%= submit_tag "Search", :name => nil, class: 'btn btn-primary' %>
+  </div>
+<% end %>
