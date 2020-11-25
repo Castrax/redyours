@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
   default from: 'contact@mathilderobert.com'
-  before_action :set_user, :set_comment, :set_url
+  before_action :set_user, :set_comment
 
   def welcome_ticket_email
     @ticket = @user.tickets.last
@@ -9,6 +9,7 @@ class UserMailer < ApplicationMailer
   end
 
   def comment_email
+    @url_ticket = url_for(@comment.ticket)
     mail(to: @user.email, subject: "You have a new comment on : #{@comment.ticket.title}")
   end
 
@@ -20,9 +21,5 @@ class UserMailer < ApplicationMailer
 
   def set_comment
     @comment = params[:comment]
-  end
-
-  def set_url
-    @url_ticket = url_for(@ticket)
   end
 end
