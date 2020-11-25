@@ -16,8 +16,8 @@ OPEN = [true, true, true, false]
 
 puts "Creating users..."
 u1 = User.create(first_name: 'Mathilde', last_name: 'Robert', email: 'm.robert@skema.edu', password: 'testtest', admin: true)
-u2 = User.create(first_name: 'Aurélie', last_name: 'Rix', email: 'aurelie.test@gmail.com', password: 'testtest', admin: false)
-u3 = User.create(first_name: 'Paula', last_name: 'Richeux', email: 'paula.test@gmail.com', password: 'testtest', admin: false)
+u2 = User.create(first_name: 'Aurélie', last_name: 'Rix', email: 'm.robert@skema.edu', password: 'testtest', admin: false)
+u3 = User.create(first_name: 'Paula', last_name: 'Richeux', email: 'm.robert@skema.edu', password: 'testtest', admin: false)
 u4 = User.create(first_name: 'Jérémy', last_name: 'Kenigsman', email: 'jeremy.kenigsman@simplebo.fr', password: 'qsdfghjklm', admin: true)
 
 USERS = [u1.id, u2.id, u3.id, u4.id]
