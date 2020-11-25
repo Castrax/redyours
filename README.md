@@ -52,14 +52,18 @@ J'ai utilisé ActionMailer pour paramétrer les emails, et en production, j'util
 
 ### Gems non présentes nativement
 *Devise*
+
 La gem évite d'implémenter à la main tout le système d'authentification, et notamment les vues pour se connecter au site.
 C'est la gem la plus utilisée pour l'authentification.
 
 *Cloudinary*
+
 Cloudinary est un service tiers de stockage cloud de photos et de fichiers. Elle m'a été utile pour héberger les petites images des tickets. Cette gem est nécessaire lorsque l'on déploie sur Heroku, car leur système de dynos étant éphémère, on ne peut pas y stocker des images. 
 
 *Faker*
+
 Faker est une gem permettant de générer des fausses données. Elle m'a été utile pour générer des fake titres et descriptions pour les tickets.
 
 *Sidekiq, Sidekiq-failures et Sidekiq-cron*
+
 Ce sont des gems permettant de faire tourner des background jobs sur Rails. Elle m'ont été utiles pour faire tourner le job nécessaire à la création des tickets, pour le planifier, et pour vérifier les erreurs via le Dashboard Sidekiq (disponible sur l'url /sidekiq), ouvert à tous les utilisateurs étant admin.
