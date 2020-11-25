@@ -63,8 +63,3 @@ Faker est une gem permettant de générer des fausses données. Elle m'a été u
 
 *Sidekiq, Sidekiq-failures et Sidekiq-cron*
 Ce sont des gems permettant de faire tourner des background jobs sur Rails. Elle m'ont été utiles pour faire tourner le job nécessaire à la création des tickets, pour le planifier, et pour vérifier les erreurs via le Dashboard Sidekiq (disponible sur l'url /sidekiq), ouvert à tous les utilisateurs étant admin.
-
-### Difficultés rencontrées
-Attention, malgré la création d'un nom de domaine redyours.xyz, d'ajout de DNS spécifiques chez le registrar et de recipients autorisés via le dashboard, le service Mailgun ne semble toujours pas autoriser la connexion pour les envois SMTP à toutes les adresses mail, ce qui provoque deux erreurs :
-* Une erreur 500 en front lors de la création d'un commentaire.
-* La création d'une erreur de tâche en production dans le script qui tourne pour la création de ticket.
