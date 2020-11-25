@@ -8,7 +8,7 @@ RoR : 6.0.3.4
 
 Host : Heroku
 
-Lien : [redyours.xyz](www.redyours.xyz)
+Lien : [redyours.xyz](http://www.redyours.xyz)
 
 ## BDD
 
