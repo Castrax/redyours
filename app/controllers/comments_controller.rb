@@ -9,12 +9,10 @@ class CommentsController < ApplicationController
         UserMailer.with(user: @ticket.user, comment: @comment).comment_email.deliver_now
       end
       respond_to do |format|
-        format.html
         format.js
       end
     else
       respond_to do |format|
-        format.html { render :new }
         format.js { render :error }
       end
     end

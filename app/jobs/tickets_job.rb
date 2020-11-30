@@ -4,26 +4,21 @@ class TicketsJob < ApplicationJob
   STATUS = [:in_progress, :in_review, :completed]
 
   def perform(*args)
-    morning = Time.parse('2020-11-23T08:00:00Z').utc.strftime('%H:%M:%S')
-    midday = Time.parse('2020-11-23T12:00:00Z').utc.strftime('%H:%M:%S')
-    afternoon = Time.parse('2020-11-23T18:00:00Z').utc.strftime('%H:%M:%S')
-    evening = Time.parse('2020-11-23T22:00:00Z').utc.strftime('%H:%M:%S')
-    current_time = Time.now.utc.strftime('%H:%M:%S')
-    # @users = User.all
-    random_ten = %i[raise_error raise_error raise_error raise_error raise_error
-                    raise_error raise_error raise_error raise_error create_ticket]
-    random_five = %i[raise_error raise_error raise_error raise_error create_ticket]
-    random_four = %i[raise_error raise_error raise_error create_ticket]
-    random_three = %i[raise_error raise_error create_ticket]
-    if current_time.between?(morning, midday)
-      send random_three.sample
+    morning = 8
+    midday = 12
+    afternoon = 18
+    evening = 22
+    current_time = Time.now.hour
+    n = (if current_time.between?(morning, midday)
+      3
     elsif current_time.between?(midday, afternoon)
-      send random_four.sample
+      4
     elsif current_time.between?(afternoon, evening)
-      send random_five.sample
+      5
     else
-      send random_ten.sample
-    end
+      10
+    end)
+    create_ticket if rand(n) == 0
   end
 
   def raise_error

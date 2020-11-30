@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :get_user, :get_ticket, only: :update
+  before_action :get_ticket, :check_user, only: :update
   def index
     @tickets = Ticket.where(open: true)
     @comment = Comment.new
@@ -12,12 +12,12 @@ class TicketsController < ApplicationController
 
   private
 
-  def get_user
-    @user = current_user
-  end
-
   def get_ticket
     @ticket = Ticket.find(params[:id])
+  end
+
+  def check_user
+    render status: :unprocessable_entity if current_user != @ticket.user
   end
 
   def ticket_params

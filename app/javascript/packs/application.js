@@ -17,6 +17,8 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 import "bootstrap";
+import { searchBar } from '../components/search-bar';
 
 document.addEventListener('turbolinks:load', () => {
+  searchBar();
 });
