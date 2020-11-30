@@ -8,7 +8,7 @@ RoR : 6.0.3.4
 
 Host : Heroku
 
-Lien : [redyours.xyz](www.redyours.xyz)
+Lien : [redyours.xyz](http://www.redyours.xyz)
 
 ## BDD
 
@@ -52,19 +52,18 @@ J'ai utilisé ActionMailer pour paramétrer les emails, et en production, j'util
 
 ### Gems non présentes nativement
 *Devise*
+
 La gem évite d'implémenter à la main tout le système d'authentification, et notamment les vues pour se connecter au site.
 C'est la gem la plus utilisée pour l'authentification.
 
 *Cloudinary*
+
 Cloudinary est un service tiers de stockage cloud de photos et de fichiers. Elle m'a été utile pour héberger les petites images des tickets. Cette gem est nécessaire lorsque l'on déploie sur Heroku, car leur système de dynos étant éphémère, on ne peut pas y stocker des images. 
 
 *Faker*
+
 Faker est une gem permettant de générer des fausses données. Elle m'a été utile pour générer des fake titres et descriptions pour les tickets.
 
 *Sidekiq, Sidekiq-failures et Sidekiq-cron*
-Ce sont des gems permettant de faire tourner des background jobs sur Rails. Elle m'ont été utiles pour faire tourner le job nécessaire à la création des tickets, pour le planifier, et pour vérifier les erreurs via le Dashboard Sidekiq (disponible sur l'url /sidekiq), ouvert à tous les utilisateurs étant admin.
 
-### Difficultés rencontrées
-Attention, malgré la création d'un nom de domaine redyours.xyz, d'ajout de DNS spécifiques chez le registrar et de recipients autorisés via le dashboard, le service Mailgun ne semble toujours pas autoriser la connexion pour les envois SMTP à toutes les adresses mail, ce qui provoque deux erreurs :
-* Une erreur 500 en front lors de la création d'un commentaire.
-* La création d'une erreur de tâche en production dans le script qui tourne pour la création de ticket.
+Ce sont des gems permettant de faire tourner des background jobs sur Rails. Elle m'ont été utiles pour faire tourner le job nécessaire à la création des tickets, pour le planifier, et pour vérifier les erreurs via le Dashboard Sidekiq (disponible sur l'url /sidekiq), ouvert à tous les utilisateurs étant admin.
